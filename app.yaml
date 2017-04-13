@@ -1,0 +1,46 @@
+# [START runtime]
+runtime: python27
+api_version: 1
+threadsafe: yes
+# [END runtime]
+
+handlers:
+
+#- url: /(.+)
+- url: /(.*\.(js|map|css|png|json))$
+  static_files: dist/\1
+  upload: dist/(.*)
+
+- url: /
+  static_files: dist/index.html
+  upload: dist/index.html
+
+- url: /api/.*
+  script: main.api
+
+# Temporary setting to keep gcloud from uploading not required files for deployment
+skip_files:
+- ^node_modules$
+- ^app\.yaml
+- ^README\..*
+- \.gitignore
+- ^\.git$
+- ^grunt\.js
+- ^src$
+- ^e2e$
+- \.editorconfig
+- ^karma\.config\.js
+- ^package\.json
+- ^protractor\.conf\.js
+- ^tslint\.json
+
+env_variables:
+
+    CLOUDSQL_CONNECTION_NAME: sofa-164212:europe-west1:default
+    CLOUDSQL_USER: xxx
+    CLOUDSQL_PASSWORD: xxx
+
+libraries:
+
+- name: MySQLdb
+  version: "latest"
