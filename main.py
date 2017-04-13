@@ -39,7 +39,13 @@ api = Flask(__name__)
 
 @api.route('/api/')
 def hello():
-    return 'Hello World!'
+    db = connect_to_cloudsql()
+    cursor = db.cursor()
+    cursor.execute('SHOW VARIABLES')
+    r = ""
+    for r in cursor.fetchall():
+        r += '{}\n'.format(r)
+    return r
 
 
 @api.errorhandler(500)
