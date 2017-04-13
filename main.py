@@ -43,8 +43,8 @@ def hello():
     cursor = db.cursor()
     cursor.execute('SHOW VARIABLES')
     r = ""
-    for r in cursor.fetchall():
-        r += '{}\n'.format(r)
+    for row in cursor.fetchall():
+        r += '{}\n'.format(row)
     return r
 
 
