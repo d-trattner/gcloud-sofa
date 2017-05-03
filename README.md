@@ -16,6 +16,6 @@ ng build
 
 gcloud app deploy
 
-## Live
+## Demo
 
-https://sofa-164212.appspot.com/
+https://d-trattner.github.io/
